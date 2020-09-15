@@ -19,7 +19,7 @@ const toolbar = (props) => (
         </Modal>
 
         <div className={classes.Toolbar}>
-            <Search />
+            <Search changed={props.search}/>
             <div className={classes.Buttons}>
                 <Button text='More'/>
                 <Button text='Shift Info'/>

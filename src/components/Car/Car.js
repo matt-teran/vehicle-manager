@@ -34,7 +34,7 @@ const car = (props) => {
     return finalTime;
   };
   return (
-    <div className={classes.Car}>
+    <div className={classes.Car} style={props.display ? {display: 'flex'} : {display: 'none'}}>
       <p className={classes.Ticket}>{props.ticket}</p>
       <p className={classes.Time}>{timeSince(props.time)}</p>
     </div>
