@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 
+import Aux from '../../hoc/Aux/Aux';
+
+import Toolbar from '../../components/Toolbar/Toolbar';
+import Cars from '../../components/Cars/Cars';
+
 class VehicleManager extends Component{
     render(){
         return (
-            <h1>Vehicle Manager</h1>
+            <Aux>
+                <Toolbar/>
+                <Cars/>
+            </Aux>
         );
     }
 }
