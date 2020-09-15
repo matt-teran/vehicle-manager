@@ -7,7 +7,7 @@ import classes from './Cars.module.css';
 const cars = (props) => {
     let loggedCars = [];
     for (let car in props.cars){
-        loggedCars.push(<Car key={car} ticket={car}/>);
+        loggedCars.push(<Car key={car} ticket={car} time={props.cars[car].time}/>);
     }
     return (
         <div className={classes.Cars}>

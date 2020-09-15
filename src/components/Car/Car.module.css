@@ -1,4 +1,9 @@
 .Car {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Roboto, sans-serif;
     box-shadow: 5px 4px 14px -4px rgba(0,0,0,0.75);
     border: 1px solid #838383;
     border-radius: 5px;
@@ -6,4 +11,12 @@
     width: 30%;
     height: 17%;
     margin: 3% 1%;
+}
+.Ticket {
+    font-weight: 500;
+    font-size: 36px;
+    margin: 0;
+}
+.Time {
+    margin: 0;
 }

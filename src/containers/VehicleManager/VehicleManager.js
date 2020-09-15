@@ -13,16 +13,10 @@ class VehicleManager extends Component{
                 phone: '8675309',
                 plate: '123ABCD',
                 make: 'kia',
-                color: 'red'
-            },
-            102: {
-                ticket: '102',
-                phone: '0001111',
-                plate: 'ABC1234',
-                make: 'toyota',
-                color: 'black'
+                color: 'red',
+                time: new Date("Aug 13, 2020 00:40:20")
+                
             }
-
         },
         newCar: {},
         assigning: false
@@ -33,9 +27,10 @@ class VehicleManager extends Component{
     addCarHandler = (event) => {
         event.preventDefault();
         this.assignHandler();
-
+        let updatedNewCar = {...this.state.newCar};
+        updatedNewCar.time = new Date();
         let updatedCars = {...this.state.cars};
-        updatedCars[this.state.newCar.ticket] = this.state.newCar;
+        updatedCars[this.state.newCar.ticket] = updatedNewCar;
 
         this.setState({cars: updatedCars, newCar: {}})
 
