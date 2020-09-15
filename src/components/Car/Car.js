@@ -2,10 +2,10 @@ import React from 'react';
 
 import classes from './Car.module.css';
 
-const car = () => {
+const car = (props) => {
     return (
         <div className={classes.Car}>
-            Car 1
+            {props.ticket}
         </div>
     )
 }
