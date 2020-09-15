@@ -1,0 +1,10 @@
+.Btn { 
+    outline: none;
+    border: none;
+    color: white;
+    font-family: Roboto, sans-serif;  
+    font-weight: 500;
+    border-radius: 20px;
+    padding: 2% 5%;
+    background: #275efe;
+}
