@@ -6,8 +6,10 @@
     height: 15vh;
     background-color: #B4D3F8;
 }
-.Buttons {
+
+.ToolbarRow {
     display: flex;
     justify-content: space-evenly;
-    width: 100%
+    width: 100%;
+    align-items: center;
 }

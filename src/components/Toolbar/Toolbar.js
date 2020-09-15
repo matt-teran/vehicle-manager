@@ -19,8 +19,11 @@ const toolbar = (props) => (
         </Modal>
 
         <div className={classes.Toolbar}>
-            <Search changed={props.search}/>
-            <div className={classes.Buttons}>
+            <div className={classes.ToolbarRow}>
+                <p style={{fontFamily: 'Roboto, sans-serif'}}>Now: {props.vehicleCount}</p>
+                <Search changed={props.search}/>
+            </div>
+            <div className={classes.ToolbarRow}>
                 <Button text='More'/>
                 <Button text='Shift Info'/>
                 <Button text='Assign' clicked={props.clicked}/>

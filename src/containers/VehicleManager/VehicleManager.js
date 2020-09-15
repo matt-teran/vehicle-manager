@@ -84,7 +84,8 @@ class VehicleManager extends Component{
                     showModal={this.state.assigning}
                     addCar={this.addCarHandler}
                     changed={(event) => this.inputChangedHandler(event)}
-                    search={(event) => this.searchHandler(event)}/>
+                    search={(event) => this.searchHandler(event)}
+                    vehicleCount={Object.keys(this.state.cars).length}/>
                 <Cars 
                     cars={this.state.cars}/>
             </Aux>
