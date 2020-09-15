@@ -10,6 +10,7 @@
 }
 .Background {
     display: flex;
+    display: none;
     position: fixed;
     justify-content: center;
     align-items: center;
