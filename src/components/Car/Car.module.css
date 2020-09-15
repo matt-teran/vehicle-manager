@@ -1,0 +1,8 @@
+.Car {
+    box-shadow: 5px 4px 14px -4px rgba(0,0,0,0.75);
+    border: 1px solid #838383;
+    border-radius: 5px;
+    width: 30%;
+    height: 17%;
+    margin: 3% 1%;
+}

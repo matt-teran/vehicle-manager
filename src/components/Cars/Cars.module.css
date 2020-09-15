@@ -1,4 +1,9 @@
 .Cars {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
     height: 90vh;
+    margin: 1px 1px;
     background-color: #D3DFEE;
 }
