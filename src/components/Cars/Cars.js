@@ -12,6 +12,12 @@ const cars = () => (
         <Car/>
         <Car/>
         <Car/>
+        <Car/>
+        <Car/>
+        <Car/>
+        <Car/>
+        <Car/>
+        <Car/>
     </div>
 )
 

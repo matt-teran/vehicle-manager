@@ -8,9 +8,11 @@ import classes from './Toolbar.module.css';
 const toolbar = () => (
     <div className={classes.Toolbar}>
         <Search />
-        <Button text='More'/>
-        <Button text='Info'/>
-        <Button text='Assign'/>
+        <div className={classes.Buttons}>
+            <Button text='More'/>
+            <Button text='Shift Info'/>
+            <Button text='Assign'/>
+        </div>
     </div>
 )
 

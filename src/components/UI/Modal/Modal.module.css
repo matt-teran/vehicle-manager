@@ -1,0 +1,20 @@
+.Modal {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 4px 14px -4px rgba(0,0,0,0.75);
+    height: 40vh;
+    width: 70vw;
+    background-color: white;
+}
+.Background {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    height: 100vh;
+    width: 100vw;
+    background-color: #0000005e;
+}

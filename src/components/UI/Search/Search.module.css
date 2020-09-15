@@ -1,0 +1,13 @@
+.SearchContainer {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 50%;
+    height: 35%;
+    border-radius: 20px;
+}
+.Search {
+    border: none;
+    outline-width: 0;
+    margin-left: 9%;
+}
