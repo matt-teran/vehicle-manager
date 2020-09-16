@@ -10,6 +10,7 @@ class VehicleManager extends Component{
         cars: {
             101: {
                 display: true,
+                focus: false,
                 ticket: '101',
                 phone: '8675309',
                 plate: '123ABCD',
@@ -19,6 +20,7 @@ class VehicleManager extends Component{
             },
             102: {
                 display: true,
+                focus: false,
                 ticket: '102',
                 phone: '4132456',
                 plate: '123ABCD',
@@ -28,6 +30,7 @@ class VehicleManager extends Component{
             },
             103: {
                 display: true,
+                focus: false,
                 ticket: '103',
                 phone: '5373608',
                 plate: '123ABCD',
@@ -79,8 +82,16 @@ class VehicleManager extends Component{
         this.setState({cars: updatedCars});
     }
     carClickedHandler = (ticket) => {
-        console.log(ticket);
-        this.setState({viewing: true, viewingCar: ticket});
+        let updatedCars = {...this.state.cars};
+        for (let car in updatedCars){
+            updatedCars[car].focus = car === ticket ? true : false;
+        }
+        this.setState({cars: updatedCars, viewing: true, viewingCar: ticket});
+    }
+    checkoutHandler = () => {
+        let updatedCars = {...this.state.cars};
+        delete updatedCars[this.state.viewingCar];
+        this.setState({cars: updatedCars, viewing: false, viewingCar: null});
     }
     render(){
         return (
@@ -96,10 +107,41 @@ class VehicleManager extends Component{
                     cars={this.state.cars} 
                     clicked={this.carClickedHandler}
                     showModal={this.state.viewing}
-                    viewedCar={this.state.viewingCar}/>
+                    viewedCar={this.state.viewingCar}
+                    checkout={this.checkoutHandler}/>
             </Aux>
         );
     }
 }
 
 export default VehicleManager;
+
+//cars: {
+//     101: {
+//         display: true,
+//         ticket: '101',
+//         phone: '8675309',
+//         plate: '123ABCD',
+//         make: 'honda',
+//         color: 'white',
+//         time: new Date("Aug 13, 2020 00:40:20")
+//     },
+//     102: {
+//         display: true,
+//         ticket: '102',
+//         phone: '4132456',
+//         plate: '123ABCD',
+//         make: 'kia',
+//         color: 'red',
+//         time: new Date("Sep 13, 2020 02:40:20")
+//     },
+//     103: {
+//         display: true,
+//         ticket: '103',
+//         phone: '5373608',
+//         plate: '123ABCD',
+//         make: 'toyota',
+//         color: 'black',
+//         time: new Date("Sep 14, 2020 00:30:20")
+//     }
+// }

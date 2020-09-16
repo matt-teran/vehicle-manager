@@ -19,7 +19,8 @@ const cars = (props) => {
             make={props.cars[car].make}
             color={props.cars[car].color}
             time={props.cars[car].time}
-            clicked={props.clicked}/>);
+            clicked={props.clicked}
+            focus={props.cars[car].focus}/>);
     }
 
     return (
@@ -27,7 +28,8 @@ const cars = (props) => {
             <CarModal showModal={props.showModal}>
 
                 <CarSummary 
-                    viewedCar={ props.cars[props.viewedCar] }/>
+                    viewedCar={ props.cars[props.viewedCar] }
+                    checkout={props.checkout}/>
             
             </CarModal>
             <div className={classes.Cars}>

@@ -15,7 +15,7 @@ const carSummary = (props) => {
                 <p>Color: {props.viewedCar.color}</p>
             </div>
             <div className={classes.CarOptions}>
-                <Button text='Checkout' />
+                <Button clicked={props.checkout} text='Checkout' />
                 <Button text='Edit' />
                 <Button text='Transfer' />
                 <Button text='Request' />
