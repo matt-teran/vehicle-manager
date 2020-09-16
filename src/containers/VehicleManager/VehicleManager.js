@@ -42,7 +42,8 @@ class VehicleManager extends Component{
         newCar: {display: true},
         assigning: false,
         viewing: false,
-        viewingCar: null
+        viewingCar: null,
+        editing: false
     }
     assignHandler = () => {
         this.setState({newCar: {display: true}, assigning: !this.state.assigning});
@@ -50,7 +51,7 @@ class VehicleManager extends Component{
     addCarHandler = (event) => {
         event.preventDefault();
         let updatedNewCar = {...this.state.newCar};
-        updatedNewCar.time = new Date();
+        if (!updatedNewCar.time)updatedNewCar.time = new Date();
         let updatedCars = {...this.state.cars};
         updatedCars[this.state.newCar.ticket] = updatedNewCar;
         
@@ -93,6 +94,9 @@ class VehicleManager extends Component{
         delete updatedCars[this.state.viewingCar];
         this.setState({cars: updatedCars, viewing: false, viewingCar: null});
     }
+    editHandler = () => {
+        this.setState({newCar: this.state.cars[this.state.viewingCar], assigning: !this.state.assigning, editing: true});
+    }
     render(){
         return (
             <Aux>
@@ -102,46 +106,19 @@ class VehicleManager extends Component{
                     addCar={this.addCarHandler}
                     changed={(event) => this.inputChangedHandler(event)}
                     search={(event) => this.searchHandler(event)}
-                    carCount={Object.keys(this.state.cars).length}/>
+                    carCount={Object.keys(this.state.cars).length}
+                    editCar={this.state.newCar}
+                    editing={this.state.editing}/>
                 <Cars 
                     cars={this.state.cars} 
                     clicked={this.carClickedHandler}
                     showModal={this.state.viewing}
                     viewedCar={this.state.viewingCar}
-                    checkout={this.checkoutHandler}/>
+                    checkout={this.checkoutHandler}
+                    edit={this.editHandler}/>
             </Aux>
         );
     }
 }
 
 export default VehicleManager;
-
-//cars: {
-//     101: {
-//         display: true,
-//         ticket: '101',
-//         phone: '8675309',
-//         plate: '123ABCD',
-//         make: 'honda',
-//         color: 'white',
-//         time: new Date("Aug 13, 2020 00:40:20")
-//     },
-//     102: {
-//         display: true,
-//         ticket: '102',
-//         phone: '4132456',
-//         plate: '123ABCD',
-//         make: 'kia',
-//         color: 'red',
-//         time: new Date("Sep 13, 2020 02:40:20")
-//     },
-//     103: {
-//         display: true,
-//         ticket: '103',
-//         phone: '5373608',
-//         plate: '123ABCD',
-//         make: 'toyota',
-//         color: 'black',
-//         time: new Date("Sep 14, 2020 00:30:20")
-//     }
-// }

@@ -16,7 +16,7 @@ const carSummary = (props) => {
             </div>
             <div className={classes.CarOptions}>
                 <Button clicked={props.checkout} text='Checkout' />
-                <Button text='Edit' />
+                <Button clicked={props.edit}text='Edit' />
                 <Button text='Transfer' />
                 <Button text='Request' />
                 <Button text='Text Guest' />

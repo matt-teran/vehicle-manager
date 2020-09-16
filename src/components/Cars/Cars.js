@@ -25,16 +25,17 @@ const cars = (props) => {
 
     return (
         <Aux>
+            <div className={classes.Cars}>
+                {loggedCars}
+            </div>
             <CarModal showModal={props.showModal}>
 
                 <CarSummary 
                     viewedCar={ props.cars[props.viewedCar] }
-                    checkout={props.checkout}/>
+                    checkout={props.checkout}
+                    edit={props.edit}/>
             
             </CarModal>
-            <div className={classes.Cars}>
-                {loggedCars}
-            </div>
         </Aux>
     )
 }

@@ -15,7 +15,9 @@ const toolbar = (props) => (
             clicked={props.clicked}>
             <Assign 
                 addCar={props.addCar}
-                changed={props.changed}/>
+                changed={props.changed}
+                editedCar={props.editCar}
+                disable={props.editing}/>
         </Modal>
 
         <div className={classes.Toolbar}>
