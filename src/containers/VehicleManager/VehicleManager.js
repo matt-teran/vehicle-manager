@@ -41,12 +41,13 @@ class VehicleManager extends Component{
         },
         newCar: {display: true},
         assigning: false,
+        openMore: false,
         viewing: false,
         viewingCar: null,
         editing: false
     }
     assignHandler = () => {
-        this.setState({newCar: {display: true}, assigning: !this.state.assigning});
+        this.setState({newCar: {display: true}, assigning: !this.state.assigning, openMore: false});
     }
     addCarHandler = (event) => {
         event.preventDefault();
@@ -97,11 +98,21 @@ class VehicleManager extends Component{
     editHandler = () => {
         this.setState({newCar: this.state.cars[this.state.viewingCar], assigning: !this.state.assigning, editing: true});
     }
+    moreHandler = () => {
+        this.setState({openMore: true})
+    }
+    closeModalHandler = () => {
+        this.setState({assigning: false, openMore: false})
+    }
     render(){
         return (
             <Aux>
                 <Toolbar 
-                    clicked={this.assignHandler}
+                    closeModal={this.closeModalHandler}
+                    assign={this.assignHandler}
+                    assigning={this.state.assigning}
+                    more={this.moreHandler}
+                    openMore={this.state.openMore}
                     showModal={this.state.assigning}
                     addCar={this.addCarHandler}
                     changed={(event) => this.inputChangedHandler(event)}
