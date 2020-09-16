@@ -37,7 +37,9 @@ class VehicleManager extends Component{
             }
         },
         newCar: {display: true},
-        assigning: false
+        assigning: false,
+        viewing: false,
+        viewingCar: null
     }
     assignHandler = () => {
         this.setState({newCar: {display: true}, assigning: !this.state.assigning});
@@ -76,6 +78,10 @@ class VehicleManager extends Component{
         }
         this.setState({cars: updatedCars});
     }
+    carClickedHandler = (ticket) => {
+        console.log(ticket);
+        this.setState({viewing: true, viewingCar: ticket});
+    }
     render(){
         return (
             <Aux>
@@ -85,9 +91,12 @@ class VehicleManager extends Component{
                     addCar={this.addCarHandler}
                     changed={(event) => this.inputChangedHandler(event)}
                     search={(event) => this.searchHandler(event)}
-                    vehicleCount={Object.keys(this.state.cars).length}/>
+                    carCount={Object.keys(this.state.cars).length}/>
                 <Cars 
-                    cars={this.state.cars}/>
+                    cars={this.state.cars} 
+                    clicked={this.carClickedHandler}
+                    showModal={this.state.viewing}
+                    viewedCar={this.state.viewingCar}/>
             </Aux>
         );
     }

@@ -1,6 +1,9 @@
 import React from 'react';
 
+import Aux from '../../hoc/Aux/Aux';
 import Car from '../Car/Car';
+import CarModal from '../UI/CarModal/CarModal';
+import CarSummary from '../UI/CarSummary/CarSummary';
 
 import classes from './Cars.module.css';
 
@@ -15,12 +18,22 @@ const cars = (props) => {
             plate={props.cars[car].plate}
             make={props.cars[car].make}
             color={props.cars[car].color}
-            time={props.cars[car].time}/>);
+            time={props.cars[car].time}
+            clicked={props.clicked}/>);
     }
+
     return (
-        <div className={classes.Cars}>
-            {loggedCars}
-        </div>
+        <Aux>
+            <CarModal showModal={props.showModal}>
+
+                <CarSummary 
+                    viewedCar={ props.cars[props.viewedCar] }/>
+            
+            </CarModal>
+            <div className={classes.Cars}>
+                {loggedCars}
+            </div>
+        </Aux>
     )
 }
 

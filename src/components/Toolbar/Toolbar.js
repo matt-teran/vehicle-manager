@@ -20,7 +20,7 @@ const toolbar = (props) => (
 
         <div className={classes.Toolbar}>
             <div className={classes.ToolbarRow}>
-                <p style={{fontFamily: 'Roboto, sans-serif'}}>Now: {props.vehicleCount}</p>
+                <p style={{fontFamily: 'Roboto, sans-serif'}}>Now: {props.carCount}</p>
                 <Search changed={props.search}/>
             </div>
             <div className={classes.ToolbarRow}>
