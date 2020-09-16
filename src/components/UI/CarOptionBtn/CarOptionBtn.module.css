@@ -1,0 +1,10 @@
+.CarOptionBtn {
+    outline: none;
+    border: none;
+    font-family: Roboto, sans-serif;
+    font-size: 1em;
+    width: 20vw;
+    padding: 0;
+    color: white;
+    background: #275efe;
+}
