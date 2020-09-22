@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from '../../axios-instance';
 
 import Aux from '../../hoc/Aux/Aux';
 
@@ -55,6 +56,13 @@ class VehicleManager extends Component{
         if (!updatedNewCar.time)updatedNewCar.time = new Date();
         let updatedCars = {...this.state.cars};
         updatedCars[this.state.newCar.ticket] = updatedNewCar;
+        axios.post('/add-car', updatedNewCar)
+            .then(res=>{
+                console.log('car logged')
+            })
+            .catch(err=>{
+                console.log(err);
+            })
         
         this.assignHandler();
         this.setState({cars: updatedCars})
