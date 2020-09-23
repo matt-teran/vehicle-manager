@@ -47,6 +47,9 @@ class VehicleManager extends Component{
         viewingCar: null,
         editing: false
     }
+    componentDidMount(){
+        this.getCarsHandler();
+    }
     assignHandler = () => {
         this.setState({newCar: {display: true}, assigning: !this.state.assigning, openMore: false});
     }
@@ -59,14 +62,28 @@ class VehicleManager extends Component{
         axios.post('/add-car', updatedNewCar)
             .then(res=>{
                 console.log('car logged')
+                this.getCarsHandler();
             })
             .catch(err=>{
                 console.log(err);
             })
-        
         this.assignHandler();
-        this.setState({cars: updatedCars})
-
+        // this.setState({cars: updatedCars})
+        
+    }
+    getCarsHandler = () => {
+        axios.get('/get-cars')
+            .then(res => {
+                let fetchedCars = {};
+                res.data.forEach(car => {
+                    fetchedCars[car.ticket] = {...car}
+                    fetchedCars[car.ticket].time = new Date(car.time);
+                })
+                this.setState({cars: fetchedCars});
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
     inputChangedHandler = (event) => {
         let updatedNewCar = {...this.state.newCar};
@@ -74,7 +91,7 @@ class VehicleManager extends Component{
         this.setState({newCar: updatedNewCar});
     }
     searchHandler = (event) => {
-
+        
         let updatedCars = {...this.state.cars}
         for (let car in updatedCars){
             if (updatedCars[car].ticket.indexOf(event.target.value) !== -1){
@@ -141,3 +158,5 @@ class VehicleManager extends Component{
 }
 
 export default VehicleManager;
+
+//"2020-09-23T09:56:36.812Z"

@@ -5,7 +5,7 @@ const assign = (props) => {
     return (
         <form className={classes.Form}
             onSubmit={props.addCar}>
-            <input className={classes.Input} type="text" placeholder="Ticket #" onChange={props.changed} id="ticket" value={props.editedCar.ticket} readonly={props.disable ? 'readonly' : null}/>
+            <input className={classes.Input} type="text" placeholder="Ticket #" onChange={props.changed} id="ticket" value={props.editedCar.ticket} readOnly={props.disable ? 'readonly' : null}/>
             <input className={classes.Input} type="text" placeholder="Phone #" onChange={props.changed} id="phone" value={props.editedCar.phone}/>
             <input className={classes.Input} type="text" placeholder="License Plate #" onChange={props.changed} id="plate" value={props.editedCar.plate}/>
             <select className={classes.Input} name="make" id="make" onChange={props.changed} value={props.editedCar.make}>

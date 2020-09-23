@@ -38,7 +38,7 @@ const car = (props) => {
       className={classes.Car} 
       style={props.display ? {display: 'flex'} : {display: 'none'}}
       // eslint-disable-next-line
-      style={props.focus ? {border: '4px solid orange'} : {border: '1px solid #838383'}}
+      style={props.focus ? {border: '4px solid orange', backgroundColor: '#C2D1FE'} : {border: '1px solid #838383'}}
       onClick={(ticket)=>props.clicked(props.ticket)}>
       <p className={classes.Ticket}>{props.ticket}</p>
       <p className={classes.Time}>{timeSince(props.time)}</p>

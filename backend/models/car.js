@@ -14,14 +14,32 @@ const getCarsFromFile = (cb) => {
 };
 
 module.exports = class Car {
-    constructor(ticket){
-        this.ticket = ticket;
+    constructor(ticket, phone, plate, make, color, time){
+        this.ticket = ticket,
+        this.phone = phone,
+        this.plate = plate,
+        this.make = make,
+        this.color = color,
+        this.time = time
     }
     save(){
         getCarsFromFile ((cars) => {
-            cars.push(this);
+            let push = true;
+            cars.forEach((car, i) => {
+                if (car.ticket === this.ticket){
+                    for (let detail in this){
+                        if (detail !== 'time' && this[detail] !== undefined){
+                            console.log(this[detail]);
+                            cars[i][detail] = this[detail];
+                        }
+                    }
+                    push = false;
+                }
+            })
+
+            if (push) cars.push(this);
             fs.writeFile(p, JSON.stringify(cars), (err)=>{
-                // console.log(err);
+                console.log(err);
             })
         })
     }
