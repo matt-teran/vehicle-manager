@@ -11,6 +11,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     height: 80%;
+    transition: all 0.35s ease-out;
 }
 .Info p {
     margin: 0;

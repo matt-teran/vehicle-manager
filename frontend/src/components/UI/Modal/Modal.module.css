@@ -9,6 +9,8 @@
     width: 70vw;
     top: 15%;
     left: 15vw;
+    transition: all 0.3s ease-out;
+    transform-style: preserve-3d;
     background-color: white;
 }
 .Backdrop {

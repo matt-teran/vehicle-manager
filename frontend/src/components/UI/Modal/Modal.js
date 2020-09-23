@@ -9,16 +9,25 @@ const modal = (props) => {
         <Aux>
             <div 
                 className={classes.Backdrop}
-                onClick={props.clicked}></div>
-            <div className={classes.Modal}>
+                onClick={props.clicked}
+                style={{
+                    visibility: props.showModal ? 'visible' : 'hidden'}}
+                ></div>
+            <div 
+                className={classes.Modal}
+                style={{
+                    visibility: props.showModal ? 'visible' : 'hidden',
+                    transform: props.showModal ? 'translate(0)' : 'rotateX(-70deg)',
+                    opacity: props.showModal ? '1' : 0
+            }}>
                 {props.children}
             </div>
         </Aux>
     )
 
-    if (!props.showModal){
-        showModal = null;
-    }
+    // if (!props.showModal){
+    //     showModal = null;
+    // }
 
     return (
         <Aux>

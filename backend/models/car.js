@@ -21,7 +21,7 @@ module.exports = class Car {
         getCarsFromFile ((cars) => {
             cars.push(this);
             fs.writeFile(p, JSON.stringify(cars), (err)=>{
-                console.log(err);
+                // console.log(err);
             })
         })
     }
