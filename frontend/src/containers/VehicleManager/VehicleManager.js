@@ -51,7 +51,7 @@ class VehicleManager extends Component{
         this.getCarsHandler();
     }
     assignHandler = () => {
-        this.setState({newCar: {display: true}, assigning: !this.state.assigning, openMore: false});
+        this.setState({newCar: {display: true}, assigning: !this.state.assigning, openMore: false, editing: false});
     }
     addCarHandler = (event) => {
         event.preventDefault();
