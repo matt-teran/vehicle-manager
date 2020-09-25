@@ -8,14 +8,34 @@
 }
 .Info {
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     height: 80%;
+    width: 90vw;
+    padding: 0 5vw;
     transition: all 0.35s ease-out;
 }
-.Info p {
+.Attributes{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.Attributes p {
     margin: 0;
-    margin-left: 5vw;
+}
+.CloseModal {
+    height: 3em;
+    width: 3em;
+    margin-top: 3.1vw;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    color: white;
+    font-family: Roboto, sans-serif;  
+    font-weight: 500;
+    background: #275efe;
+}
+.CloseModal:active{
+    background: #01248E;
 }
 .CarOptions {
     display: flex;

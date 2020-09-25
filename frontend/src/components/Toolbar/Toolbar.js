@@ -27,9 +27,9 @@ const toolbar = (props) => {
                     <Search changed={props.search}/>
                 </div>
                 <div className={classes.ToolbarRow}>
-                    <Button text='More' clicked={props.more}/>
-                    <Button text='Shift Info'/>
-                    <Button text='Assign' clicked={props.assign}/>
+                    <Button clicked={props.more}>More</Button>
+                    <Button>Shift Info</Button>
+                    <Button clicked={props.assign}>Assign</Button>
                 </div>
             </div>
         </Aux>

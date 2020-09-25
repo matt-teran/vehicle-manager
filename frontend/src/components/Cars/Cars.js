@@ -34,7 +34,8 @@ const cars = (props) => {
                 <CarSummary 
                     viewedCar={ props.cars[props.viewedCar] }
                     checkout={props.checkout}
-                    edit={props.edit}/>
+                    edit={props.edit}
+                    closeModal={props.closeCarModal}/>
             
             </CarModal>
         </Aux>
