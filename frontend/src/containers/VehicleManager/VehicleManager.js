@@ -1,160 +1,139 @@
-import React, { Component } from 'react';
-import axios from '../../axios-instance';
+import React, { Component } from "react";
+import axios from "../../axios-instance";
 
-import Aux from '../../hoc/Aux/Aux';
+import Aux from "../../hoc/Aux/Aux";
 
-import Toolbar from '../../components/Toolbar/Toolbar';
-import Cars from '../../components/Cars/Cars';
+import Toolbar from "../../components/Toolbar/Toolbar";
+import Cars from "../../components/Cars/Cars";
 
-class VehicleManager extends Component{
-    state = {
-        cars: {
-            101: {
-                display: true,
-                focus: false,
-                ticket: '101',
-                phone: '8675309',
-                plate: '123ABCD',
-                make: 'honda',
-                color: 'white',
-                time: new Date("Aug 13, 2020 00:40:20")
-            },
-            102: {
-                display: true,
-                focus: false,
-                ticket: '102',
-                phone: '4132456',
-                plate: '123ABCD',
-                make: 'kia',
-                color: 'red',
-                time: new Date("Sep 13, 2020 02:40:20")
-            },
-            103: {
-                display: true,
-                focus: false,
-                ticket: '103',
-                phone: '5373608',
-                plate: '123ABCD',
-                make: 'toyota',
-                color: 'black',
-                time: new Date("Sep 14, 2020 00:30:20")
-            }
-        },
-        newCar: {display: true},
-        assigning: false,
-        openMore: false,
-        viewing: false,
-        viewingCar: null,
-        editing: false
-    }
-    componentDidMount(){
+class VehicleManager extends Component {
+  state = {
+    cars: {},
+    newCar: { display: true },
+    assigning: false,
+    openMore: false,
+    viewing: false,
+    viewingCar: null,
+    editing: false,
+  };
+  componentDidMount() {
+    this.getCarsHandler();
+  }
+  assignHandler = () => {
+    this.setState({
+      newCar: { display: true },
+      assigning: !this.state.assigning,
+      openMore: false,
+      editing: false,
+    });
+  };
+  addCarHandler = (event) => {
+    event.preventDefault();
+    let updatedNewCar = { ...this.state.newCar };
+    if (!updatedNewCar.time) updatedNewCar.time = new Date();
+    let updatedCars = { ...this.state.cars };
+    updatedCars[this.state.newCar.ticket] = updatedNewCar;
+    axios
+      .post("/add-car", updatedNewCar)
+      .then((res) => {
+        console.log("car logged");
         this.getCarsHandler();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    this.assignHandler();
+    // this.setState({cars: updatedCars})
+  };
+  getCarsHandler = () => {
+    axios
+      .get("/get-cars")
+      .then((res) => {
+        let fetchedCars = {};
+        res.data.forEach((car) => {
+          fetchedCars[car.ticket] = { ...car };
+          fetchedCars[car.ticket].display = true;
+          fetchedCars[car.ticket].time = new Date(car.time);
+        });
+        this.setState({ cars: fetchedCars });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  inputChangedHandler = (event) => {
+    let updatedNewCar = { ...this.state.newCar };
+    updatedNewCar[event.target.id] = event.target.value;
+    this.setState({ newCar: updatedNewCar });
+  };
+  carClickedHandler = (ticket) => {
+    let updatedCars = { ...this.state.cars };
+    for (let car in updatedCars) {
+      updatedCars[car].focus = car === ticket ? true : false;
     }
-    assignHandler = () => {
-        this.setState({newCar: {display: true}, assigning: !this.state.assigning, openMore: false, editing: false});
-    }
-    addCarHandler = (event) => {
-        event.preventDefault();
-        let updatedNewCar = {...this.state.newCar};
-        if (!updatedNewCar.time)updatedNewCar.time = new Date();
-        let updatedCars = {...this.state.cars};
-        updatedCars[this.state.newCar.ticket] = updatedNewCar;
-        axios.post('/add-car', updatedNewCar)
-            .then(res=>{
-                console.log('car logged')
-                this.getCarsHandler();
-            })
-            .catch(err=>{
-                console.log(err);
-            })
-        this.assignHandler();
-        // this.setState({cars: updatedCars})
-        
-    }
-    getCarsHandler = () => {
-        axios.get('/get-cars')
-            .then(res => {
-                let fetchedCars = {};
-                res.data.forEach(car => {
-                    fetchedCars[car.ticket] = {...car}
-                    fetchedCars[car.ticket].time = new Date(car.time);
-                })
-                this.setState({cars: fetchedCars});
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-    inputChangedHandler = (event) => {
-        let updatedNewCar = {...this.state.newCar};
-        updatedNewCar[event.target.id] = event.target.value;
-        this.setState({newCar: updatedNewCar});
-    }
-    searchHandler = (event) => {
-        
-        let updatedCars = {...this.state.cars}
-        for (let car in updatedCars){
-            if (updatedCars[car].ticket.indexOf(event.target.value) !== -1){
+    this.setState({ cars: updatedCars, viewing: true, viewingCar: ticket });
+  };
+  checkoutHandler = () => {
+    let updatedCars = { ...this.state.cars };
+    delete updatedCars[this.state.viewingCar];
+    this.setState({ cars: updatedCars, viewing: false, viewingCar: null });
+  };
+  editHandler = () => {
+    this.setState({
+      newCar: this.state.cars[this.state.viewingCar],
+      assigning: !this.state.assigning,
+      editing: true,
+    });
+  };
+  moreHandler = () => {
+    this.setState({ openMore: true });
+  };
+  closeModalHandler = () => {
+    this.setState({ assigning: false, openMore: false });
+  };
+
+  searchHandler = (event) => {
+    let updatedCars = { ...this.state.cars };
+    for (let car in updatedCars) {
+        updatedCars[car].display = false;
+        ['ticket', 'phone', 'plate', 'make', 'color'].forEach(x=>{
+            if (updatedCars[car][x] === undefined){ return }
+            if (updatedCars[car][x].indexOf(event.target.value) !== -1){
                 updatedCars[car].display = true;
-            } else if (updatedCars[car].phone.indexOf(event.target.value) !== -1){
-                updatedCars[car].display = true;
-            } else if (updatedCars[car].plate.indexOf(event.target.value) !== -1){
-                updatedCars[car].display = true;
-            } else if (updatedCars[car].make.indexOf(event.target.value) !== -1){
-                updatedCars[car].display = true;
-            } else if (updatedCars[car].color.indexOf(event.target.value) !== -1){
-                updatedCars[car].display = true;
-            } else { updatedCars[car].display = false}
-        }
-        this.setState({cars: updatedCars});
+            }
+        })
     }
-    carClickedHandler = (ticket) => {
-        let updatedCars = {...this.state.cars};
-        for (let car in updatedCars){
-            updatedCars[car].focus = car === ticket ? true : false;
-        }
-        this.setState({cars: updatedCars, viewing: true, viewingCar: ticket});
-    }
-    checkoutHandler = () => {
-        let updatedCars = {...this.state.cars};
-        delete updatedCars[this.state.viewingCar];
-        this.setState({cars: updatedCars, viewing: false, viewingCar: null});
-    }
-    editHandler = () => {
-        this.setState({newCar: this.state.cars[this.state.viewingCar], assigning: !this.state.assigning, editing: true});
-    }
-    moreHandler = () => {
-        this.setState({openMore: true})
-    }
-    closeModalHandler = () => {
-        this.setState({assigning: false, openMore: false})
-    }
-    render(){
-        return (
-            <Aux>
-                <Toolbar 
-                    closeModal={this.closeModalHandler}
-                    assign={this.assignHandler}
-                    assigning={this.state.assigning}
-                    more={this.moreHandler}
-                    openMore={this.state.openMore}
-                    showModal={this.state.assigning}
-                    addCar={this.addCarHandler}
-                    changed={(event) => this.inputChangedHandler(event)}
-                    search={(event) => this.searchHandler(event)}
-                    carCount={Object.keys(this.state.cars).length}
-                    editCar={this.state.newCar}
-                    editing={this.state.editing}/>
-                <Cars 
-                    cars={this.state.cars} 
-                    clicked={this.carClickedHandler}
-                    showModal={this.state.viewing}
-                    viewedCar={this.state.viewingCar}
-                    checkout={this.checkoutHandler}
-                    edit={this.editHandler}/>
-            </Aux>
-        );
-    }
+    this.setState({ cars: updatedCars });
+  };
+
+  render() {
+    return (
+      <Aux>
+        <Toolbar
+          closeModal={this.closeModalHandler}
+          assign={this.assignHandler}
+          assigning={this.state.assigning}
+          more={this.moreHandler}
+          openMore={this.state.openMore}
+          showModal={this.state.assigning}
+          addCar={this.addCarHandler}
+          changed={(event) => this.inputChangedHandler(event)}
+          search={(event) => this.searchHandler(event)}
+          carCount={Object.keys(this.state.cars).length}
+          editCar={this.state.newCar}
+          editing={this.state.editing}
+        />
+        <Cars
+          cars={this.state.cars}
+          clicked={this.carClickedHandler}
+          showModal={this.state.viewing}
+          viewedCar={this.state.viewingCar}
+          checkout={this.checkoutHandler}
+          edit={this.editHandler}
+        />
+      </Aux>
+    );
+  }
 }
 
 export default VehicleManager;
