@@ -3,5 +3,7 @@
     flex-wrap: wrap;
     align-content: flex-start;
     height: 85vh;
+    overflow-y: auto;
     background-color: #D3DFEE;
+    transition: all 0.2s;
 }

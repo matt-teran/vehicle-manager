@@ -92,7 +92,11 @@ class VehicleManager extends Component {
     this.setState({ assigning: false, openMore: false });
   };
   closeCarModalHandler = () => {
-    this.setState({viewing: false});
+    let updatedCars = { ...this.state.cars };
+    for (let car in updatedCars) {
+      updatedCars[car].focus = false;
+    }
+    this.setState({ cars: updatedCars, viewing: false, viewingCar: null });
   }
 
   searchHandler = (event) => {
@@ -135,6 +139,7 @@ class VehicleManager extends Component {
           checkout={this.checkoutHandler}
           edit={this.editHandler}
           closeCarModal={this.closeCarModalHandler}
+          showCarModal={this.state.viewing}
         />
       </Aux>
     );

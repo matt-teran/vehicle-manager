@@ -26,7 +26,8 @@ const cars = (props) => {
 
     return (
         <Aux>
-            <div className={classes.Cars}>
+            <div className={classes.Cars}
+                style={{height: props.showCarModal ? '45vh' : '85vh'}}>
                 {loggedCars}
             </div>
             <CarModal showModal={props.showModal}>

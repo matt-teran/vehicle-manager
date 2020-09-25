@@ -4,6 +4,7 @@
     font-family: Roboto, sans-serif;
     font-size: 1em;
     font-weight: 500;
+    overflow: hidden;
     width: 20vw;
     padding: 0;
     color: white;
