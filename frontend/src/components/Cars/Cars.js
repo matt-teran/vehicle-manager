@@ -16,6 +16,7 @@ const cars = (props) => {
             ticket={car}
             phone={props.cars[car].phone}
             plate={props.cars[car].plate}
+            spot={props.cars[car].spot}
             make={props.cars[car].make}
             color={props.cars[car].color}
             time={props.cars[car].time}

@@ -18,6 +18,7 @@ const carSummary = (props) => {
                 <p>Ticket: {car.ticket}</p>
                 <p>Phone: {car.phone}</p>
                 <p>Plate: {car.plate}</p>
+                <p>Spot: {car.spot}</p>
                 <p>Make: {car.make}</p>
                 <p>Color: {car.color}</p>
             </div>

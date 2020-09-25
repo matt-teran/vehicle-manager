@@ -40,7 +40,8 @@ const car = (props) => {
       style={props.display ? {display: 'flex'} : {display: 'none'}}
       onClick={(ticket)=>props.clicked(props.ticket)}>
       <p className={classes.Ticket}>{props.ticket}</p>
-      <p className={classes.Time}>{timeSince(props.time)}</p>
+      <p style={{margin: '0'}}>{props.spot.toUpperCase()}</p>
+      <p style={{margin: '0'}}>{timeSince(props.time)}</p>
     </div>
   );
 };

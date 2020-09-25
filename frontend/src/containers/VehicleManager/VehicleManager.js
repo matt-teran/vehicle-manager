@@ -96,9 +96,10 @@ class VehicleManager extends Component {
     let updatedCars = { ...this.state.cars };
     for (let car in updatedCars) {
         updatedCars[car].display = false;
-        ['ticket', 'phone', 'plate', 'make', 'color'].forEach(x=>{
+        ['ticket', 'phone', 'plate', 'spot', 'make', 'color'].forEach(x=>{
+            let detail = updatedCars[car][x];
             if (updatedCars[car][x] === undefined){ return }
-            if (updatedCars[car][x].indexOf(event.target.value) !== -1){
+            if (detail.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1){
                 updatedCars[car].display = true;
             }
         })

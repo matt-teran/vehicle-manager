@@ -14,10 +14,11 @@ const getCarsFromFile = (cb) => {
 };
 
 module.exports = class Car {
-    constructor(ticket, phone, plate, make, color, time){
+    constructor(ticket, phone, plate, spot, make, color, time){
         this.ticket = ticket,
         this.phone = phone,
         this.plate = plate,
+        this.spot = spot,
         this.make = make,
         this.color = color,
         this.time = time
